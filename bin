@@ -14,5 +14,5 @@ echo -e "# Release v$NEW_VERSION\n\n$CHANGES\n\n$(cat CHANGELOG.md)" > CHANGELOG
 git add CHANGELOG.md
 git commit -m "Release v$NEW_VERSION"
 git tag $NEW_VERSION
-git push --follow-tags
+git push origin --tags
 xdg-open "$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION&merge_request[description]=$DESCRIPTION"
