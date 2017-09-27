@@ -7,7 +7,7 @@
 #   |_.__/ \__,_|_| |_| |_| .__(_)___/_| |_|
 #                         | |
 #                         |_|
-#   by @rakshazi
+#                               by @rakshazi
 PREFIX="\033[0;32m[bump.sh]\033[0m"
 
 # help

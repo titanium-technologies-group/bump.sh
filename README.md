@@ -1,11 +1,24 @@
 # bump.sh
 
+```bash
+#!/bin/bash
+#    _                                _
+#   | |                              | |
+#   | |__  _   _ _ __ ___  _ __   ___| |__
+#   | '_ \| | | | '_ ` _ \| '_ \ / __| '_ \
+#   | |_) | |_| | | | | | | |_) |\__ \ | | |
+#   |_.__/ \__,_|_| |_| |_| .__(_)___/_| |_|
+#                         | |
+#                         |_|
+#                               by @rakshazi
+```
+
 * Collects changes from commit summaries between branches
-* Generates file `CHANGELOG` with list of all changes
+* Generates file `CHANGELOG.md` with list of all changes
 * Commits that file with commit summary `Release v<NEW_VERSION>`
-* Creates new tag with release version
-* Pushes commit with new tag
-* Opens Gitlab Merge Request (url generated from origin url) with predefined title, description and branches in browser
+* Creates new tag with release version and changes list as message
+* Pushes commit with new tag and updated changelog
+* Opens Gitlab Merge Request (url generated from origin url) with predefined title, description (changes list) and branches in browser
 
 **PLEASE**, use http://semver.org/
 
