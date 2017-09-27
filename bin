@@ -4,14 +4,15 @@ BRANCH_CURRENT=$(git rev-parse --abbrev-ref HEAD)
 BRANCH_1="${1:-$BRANCH_CURRENT}"
 BRANCH_2="${2:-master}"
 CHANGES=$(git log --oneline --no-merges --full-history $BRANCH_1...$BRANCH_2 | sed -u 's/^/\* /g')
+DESCRIPTION=$([ ${#CHANGES} -ge 250 ] && echo "See CHANGELOG.md for list of changes" || echo $CHANGES)
 PREVIOUS_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
 REPO_URL=$(git remote get-url origin | sed -u 's/git@//g; s/:/\//g; s/.git//g')
 printf "CHANGES:\n$CHANGES\n\n"
-echo -n "Enter new version (BRANCH: $BRANCH_CURRENT | Previous version: $PREVIOUS_VERSION): "
+echo -n "Enter new version (Current branch: $BRANCH_CURRENT | Previous version: $PREVIOUS_VERSION): "
 read NEW_VERSION
-echo -e "# Release v$NEW_VERSION\n\n$CHANGES\n\n$(cat CHANGELOG)" > CHANGELOG
-git add CHANGELOG
+echo -e "# Release v$NEW_VERSION\n\n$CHANGES\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
+git add CHANGELOG.md
 git commit -m "Release v$NEW_VERSION"
 git tag $NEW_VERSION
 git push --follow-tags
-xdg-open "$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION&merge_request[description]=$CHANGES"
+xdg-open "$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION&merge_request[description]=$DESCRIPTION"
