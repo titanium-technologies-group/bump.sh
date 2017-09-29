@@ -25,7 +25,6 @@ BRANCH_CURRENT=$(git rev-parse --abbrev-ref HEAD)
 BRANCH_1="${1:-$BRANCH_CURRENT}"
 BRANCH_2="${2:-master}"
 CHANGES=$(git log --oneline --no-merges --full-history $BRANCH_1...$BRANCH_2 | sed -u 's/^/\* /g')
-DESCRIPTION="${CHANGES:0:1500}...\n\nMore in CHANGELOG.md"
 REPO_URL=$(git remote get-url origin | sed -u 's/git@//g; s/:/\//g; s/.git//g')
 
 # Fetch origin headers (to avoid duplicates and outdated versions)
@@ -41,15 +40,15 @@ read NEW_VERSION
 # Update changelog
 echo -e "# Release v[$NEW_VERSION]($REPO_URL/tags/$NEW_VERSION)\n\n$CHANGES\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
 git add CHANGELOG.md
-git commit -m -q "Release v$NEW_VERSION"
+git commit -q -m "Release v$NEW_VERSION"
 
 # Create new tag with changes
-git tag $NEW_VERSION -q -m $"$CHANGES"
+git tag $NEW_VERSION -m $"$CHANGES"
 echo -e "$PREFIX Pushing..."
 
 # Push changes with new tag
 git push origin --follow-tags
 
 # Open merge request url with preset changes
-xdg-open "$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION&merge_request[description]=$DESCRIPTION"
+xdg-open "https://$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION"
 echo -e "$PREFIX Don't forget to notify your teammates about new release!"

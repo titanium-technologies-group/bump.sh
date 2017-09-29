@@ -18,7 +18,7 @@
 * Commits that file with commit summary `Release v<NEW_VERSION>`
 * Creates new tag with release version and changes list as message
 * Pushes commit with new tag and updated changelog
-* Opens Gitlab Merge Request (url generated from origin url) with predefined title, description (changes list) and branches in browser
+* Opens Gitlab Merge Request (url generated from origin url) with predefined title and branches in browser
 
 **PLEASE**, use http://semver.org/
 
