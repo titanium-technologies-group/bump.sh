@@ -25,7 +25,7 @@
 ## Integration with git
 
 ```bash
-sudo curl -o /usr/local/bin/git-bump -s https://raw.githubusercontent.com/rakshazi/bump.sh/master/bin && sudo chmod +x /usr/local/bin/git-bump
+sudo curl -o /usr/local/bin/git-bump -s https://raw.githubusercontent.com/titanium-codes/bump.sh/master/bin && sudo chmod +x /usr/local/bin/git-bump
 git config --global alias.bump "git-bump"
 ```
 
