@@ -50,5 +50,9 @@ echo -e "$PREFIX Pushing..."
 git push origin --follow-tags
 
 # Open merge request url with preset changes
-xdg-open "https://$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION"
+if [[ $REPO_URL == *"gitlab"* ]]; then
+    xdg-open "https://$REPO_URL/merge_requests/new?utf8=✓&merge_request[source_branch]=$BRANCH_1&merge_request[target_branch]=$BRANCH_2&merge_request[title]=$NEW_VERSION"
+elif [[ $REPO_URL == *"github"* ]]; then
+    xdg-open "https://$REPO_URL/compare/$BRANCH_1...$BRANCH_2&pull_request[title]=$NEW_VERSION"
+fi
 echo -e "$PREFIX Don't forget to notify your teammates about new release!"

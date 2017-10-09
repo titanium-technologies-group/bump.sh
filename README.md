@@ -18,14 +18,14 @@
 * Commits that file with commit summary `Release v<NEW_VERSION>`
 * Creates new tag with release version and changes list as message
 * Pushes commit with new tag and updated changelog
-* Opens Gitlab Merge Request (url generated from origin url) with predefined title and branches in browser
+* Opens Gitlab Merge Request or GitHub Pull Request (url generated from origin url) with predefined title and branches in browser
 
 **PLEASE**, use http://semver.org/
 
 ## Integration with git
 
 ```bash
-sudo curl -o /usr/local/bin/git-bump -s https://raw.githubusercontent.com/titanium-codes/bump.sh/master/bin && sudo chmod +x /usr/local/bin/git-bump
+sudo curl -o /usr/local/bin/git-bump -s https://raw.githubusercontent.com/titanium-codes/bump.sh/stable/bin && sudo chmod +x /usr/local/bin/git-bump
 git config --global alias.bump "git-bump"
 ```
 
