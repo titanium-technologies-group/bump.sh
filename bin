@@ -38,7 +38,12 @@ echo -n "Enter new version (Current branch: $BRANCH_CURRENT | Previous version: 
 read NEW_VERSION
 
 # Update changelog
-echo -e "# Release v[$NEW_VERSION]($REPO_URL/tags/$NEW_VERSION)\n\n$CHANGES\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
+if [[ $REPO_URL == *"gitlab"* ]]; then
+    TAG_URL="https://$REPO_URL/tags/$NEW_VERSION"
+elif [[ $REPO_URL == *"github"* ]]; then
+    TAG_URL="https://$REPO_URL/tree/$NEW_VERSION"
+fi
+echo -e "# Release v[$NEW_VERSION]($TAG_URL)\n\n$CHANGES\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
 git add CHANGELOG.md
 git commit -q -m "Release v$NEW_VERSION"
 
